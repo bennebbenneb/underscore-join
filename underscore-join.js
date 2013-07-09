@@ -1,5 +1,7 @@
+// Produce an array that contains a join of the passed-in arrays.
+// Last argument is a comparator function to compare keys
 _.mixin({
-    join: function (obj, attrs) {
+    join: function () {
         var cmp = arguments[arguments.length - 1];
         var join = [];
         _.each(arguments, function (array) {
