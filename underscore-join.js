@@ -5,15 +5,15 @@ _.mixin({
         var cmp = arguments[arguments.length - 1];
         var join = [];
         _.each(arguments, function (array) {
-            if (typeof array === "function") return;
+            if (_.isFunction(array)) return;
             _.each(array, function (newObj) {
                 var isMerged = false;
                 _.each(join, function (joinObj, joinIndex) {
                     if (cmp(newObj, joinObj)) {
-                        _.each(joinObj, function (value, key) {
-                            newObj[key] = value;
+                        _.each(newObj, function (value, key) {
+                            joinObj[key] = value;
                         });
-                        join[joinIndex] = newObj;
+                        join[joinIndex] = joinObj;
                         isMerged = true;
                     }
                 });

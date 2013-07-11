@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="http://underscorejs.org/underscore.js"></script>
+    <script src="underscore-join.js"></script>
+    <script>
+
+        var uniqueIdsPerList = 1000;
+        var objectsPerList = 10000;
+        var lists = [
+            [],
+            [],
+            []
+        ];
+
+        var startTime = +new Date();
+        _.each(lists, function (list, index) {
+            for (var i = 0; i < objectsPerList; i++) {
+                var tempObj = {};
+                var propName = "list" + index + "prop" + i;
+                tempObj["id"] = index + i % uniqueIdsPerList;
+                tempObj[propName] = propName;
+                list.push(tempObj);
+            }
+        });
+        var endTime = +new Date();
+        console.log(endTime - startTime);
+
+        joinArguments = lists.concat(function (l1, l2) {
+            return l1.id === l2.id;
+        });
+
+        startTime = +new Date();
+        var join = _.join.apply(_.join, joinArguments);
+        endTime = +new Date();
+
+        console.log(endTime - startTime);
+        console.log(join);
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>
